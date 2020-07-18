@@ -15,7 +15,7 @@ export default () => (
       <Main>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/markets" component={Markets} />
+          <Route path="/:symbolId" component={Markets} />
         </Switch>
       </Main>
     </ThemeProvider>
