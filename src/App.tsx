@@ -6,6 +6,7 @@ import { GlobalStyles } from 'utils/global';
 import { Main } from 'components/Main';
 import { Markets } from 'pages/markets';
 import { Home } from 'pages/home';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
 export default () => (
   <BrowserRouter>
