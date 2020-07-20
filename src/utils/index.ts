@@ -1,11 +1,14 @@
 export const splitName = (name: string): string => name.split(':')[1] || '';
 
-export const formatCurrency = (amount: number | string, format: string = 'en-US'): string => {
+export const formatCurrency = (amount: number | string, format: string = 'currency'): string => {
     if (!amount) return '';
 
-    return new Intl.NumberFormat(format,
-        { style: 'currency', currency: 'USD', maximumSignificantDigits: 3 }
-    ).format(Number(amount));
+    const numAmount = Number(amount);
+    const _amount = format === 'currency' ? numAmount : numAmount / 100;
+
+    return new Intl.NumberFormat('en-US',
+        { style: format, currency: 'USD', maximumSignificantDigits: 5 }
+    ).format(Number(_amount));
 }
 
 export const averagePrices = (prices: number[]): number | string => {

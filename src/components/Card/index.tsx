@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import { SmallTitle, Title } from 'components/Text';
+import { Row, Column } from 'components/Grid';
+import { formatCurrency, splitName } from 'utils';
 
 const SimpleCardContainer = styled.div`
     display: flex;
@@ -12,34 +15,72 @@ const SimpleCardContainer = styled.div`
     margin-right: 30px;
     margin-bottom: 30px;
     background: white;
+    cursor: pointer;
 `;
 
-const CardName = styled.div`
-    font-weight: bold;
-    font-size: 22px;
-`;
-
-const CardPrice = styled.div`
-    font-weight: bold;
-    font-size: 22px;
-    color: blue;
-    margin-top: 10px;
+const DetailsCardContainer = styled.div`
+    padding: 30px;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    width: 600px;
+    background: white;
 `;
 
 interface CardProps {
     price: string;
-    name: String;
+    name: string;
+}
+
+interface DetailsProps {
+    data: IMarket;
 }
 
 export const SimpleCard: React.FC<CardProps> = ({ price, name }) => {
     return (
         <SimpleCardContainer>
             <div>
-                <CardName>{name}</CardName>
-                <CardPrice>{price}</CardPrice>
+                <Title big>{name}</Title>
+                <Title big color="blue">{price}</Title>
             </div>
         </SimpleCardContainer>
     );
 }
 
-export const DetailCard = () => { }
+export const DetailCard: React.FC<DetailsProps> = ({ data }) => {
+    const { lastPrice, percentChange, lowPrice, highPrice } = data.ticker || {};
+
+    return (
+        <DetailsCardContainer>
+            <p>{data.exchangeSymbol}</p>
+            <Row>
+                <Column>
+                    <Title big color="blue">{splitName(data.marketSymbol)}</Title>
+                    <SmallTitle>Pair</SmallTitle>
+                </Column>
+                <Column>
+                    <Title big color="blue">{formatCurrency(lastPrice)}</Title>
+                    <SmallTitle>Price</SmallTitle>
+                </Column>
+            </Row>
+            <hr />
+            <Row>
+                <Column>
+                    <Title>{formatCurrency(lastPrice)}</Title>
+                    <SmallTitle>Price</SmallTitle>
+                </Column>
+                <Column>
+                    <Title color="green">{formatCurrency(percentChange, 'percent')}</Title>
+                    <SmallTitle>24h change</SmallTitle>
+                </Column>
+                <Column>
+                    <Title>{formatCurrency(lowPrice)}</Title>
+                    <SmallTitle>24h Low</SmallTitle>
+                </Column>
+                <Column>
+                    <Title>{formatCurrency(highPrice)}</Title>
+                    <SmallTitle>24h High</SmallTitle>
+                </Column>
+            </Row>
+        </DetailsCardContainer>
+    );
+}

@@ -1,11 +1,12 @@
-import React from 'react';
-// import { useQuery } from "@apollo/client";
-// import { GET_MARKET } from 'gql/assets';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchAssets } from 'redux/assets/action';
 
-// @ts-ignore
-export const Main: React.FC = props => {
-    // const { loading, error, data } = useQuery(GET_MARKET);
-    // // @ts-ignore
-    // return loading ? <p>Loading...</p> : children(data);
-    return props.children;
+export const Main: React.FC = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchAssets(25));
+    }, [dispatch]);
+
+    return null;
 }
