@@ -28,6 +28,9 @@ export const Markets: React.FC = () => {
             const filtered = data.assets.find((item: any) => item.id === symbolId);
             return _groupBy(filtered.markets, 'exchangeSymbol');
         }, [symbolId, data]);
+    const CardClick = (symbolId: string, marketSymbol: string) => () => {
+        history.push(`/${symbolId}/${encodeURIComponent(marketSymbol)}`);
+    }
 
     if (loading) return null;
 
@@ -39,6 +42,7 @@ export const Markets: React.FC = () => {
                     <SimpleCard
                         name={splitName(asset.marketSymbol)}
                         price={formatCurrency(_get(asset, 'ticker.lastPrice', ''))}
+                        onClick={CardClick(symbolId, asset.marketSymbol)}
                     />
                 )
                 return (

@@ -4,19 +4,16 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.0.0-rc.6",
-    "@material-ui/core": "^4.11.0",
     "graphql": "^15.1.0",
     "lodash.get": "^4.4.2",
     "lodash.groupby": "^4.6.0",
-    "material-table": "^1.65.0",
-    "rc-table": "^7.8.4",
     "react": "^16.13.1",
-    "react-base-table": "^1.10.5",
     "react-bootstrap-table-next": "^4.0.3",
-    "react-data-table-component": "^6.9.7",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
     "styled-components": "^5.1.1"
   },
   "scripts": {
@@ -51,6 +48,7 @@
     "@types/react": "^16.9.43",
     "@types/react-bootstrap-table-next": "^4.0.5",
     "@types/react-dom": "^16.9.8",
+    "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.1",
     "typescript": "^3.9.7"

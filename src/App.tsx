@@ -5,7 +5,9 @@ import { lightTheme, darkTheme } from 'utils/theme';
 import { GlobalStyles } from 'utils/global';
 import { Main } from 'components/Main';
 import { Markets } from 'pages/markets';
+import { Details } from 'pages/details';
 import { Home } from 'pages/home';
+import { NotFound } from 'pages/notfound';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 
 export default () => (
@@ -15,7 +17,10 @@ export default () => (
       <Main>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/:symbolId" component={Markets} />
+          <Route exact path="/:symbolId" component={Markets} />
+          <Route exact path="/:symbolId/:symbol" component={Details} />
+
+          <Route component={NotFound} />
         </Switch>
       </Main>
     </ThemeProvider>

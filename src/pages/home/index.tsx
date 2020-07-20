@@ -12,7 +12,8 @@ const columns = [{
     text: 'Name'
 }, {
     dataField: 'assetSymbol',
-    text: 'Pair'
+    text: 'Pair',
+    formatter: (cell: string) => cell + '/USD'
 }, {
     dataField: 'marketCap',
     text: 'Market Cap',
@@ -54,6 +55,8 @@ export const Home: React.FC = () => {
                     columns={columns}
                     data={data.assets}
                     bordered={false}
+                    hover
+                    rowStyle={{ cursor: 'pointer' }}
                     rowEvents={{
                         onClick: (t, r) => history.push('/' + r.id)
                     }}
