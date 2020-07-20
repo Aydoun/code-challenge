@@ -9,7 +9,7 @@ interface IMarket {
     marketSymbol: string;
     baseSymbol: string;
     exchangeSymbol: string;
-    ticker: ITicker[]
+    ticker: ITicker
 }
 
 interface IAssetsState {
@@ -18,6 +18,14 @@ interface IAssetsState {
     assetSymbol: string;
     marketCap: number;
     markets: IMarket[];
+}
+
+type IAssetResponse = {
+    assets: IAssetsState[];
     loading: boolean;
     error: boolean;
+}
+
+type RootState = {
+    assets: IAssetResponse,
 }

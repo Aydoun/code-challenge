@@ -1,9 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components/macro';
 import { Filter } from 'components/Filter';
-import { useQuery } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
-import { GET_MARKET } from 'gql/assets';
+import { GET_ASSETS } from 'gql/assets';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { formatCurrency, averagePrices } from 'utils';
 
@@ -42,8 +42,9 @@ export const TableContainer = styled.div`
 `;
 
 export const Home: React.FC = () => {
+    const { loading, assets, error } = useSelector((state: RootState) => state.assets);
     const history = useHistory();
-    const { loading, data } = useQuery(GET_MARKET);
+
     if (loading) return <p>Loading...</p>;
 
     return (
@@ -53,7 +54,7 @@ export const Home: React.FC = () => {
                 <BootstrapTable
                     keyField='id'
                     columns={columns}
-                    data={data.assets}
+                    data={assets}
                     bordered={false}
                     hover
                     rowStyle={{ cursor: 'pointer' }}
@@ -63,5 +64,5 @@ export const Home: React.FC = () => {
                 />
             </TableContainer>
         </>
-    )
+    );
 }

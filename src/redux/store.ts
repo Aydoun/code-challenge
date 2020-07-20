@@ -14,8 +14,6 @@ const rootReducer = combineReducers({
     assets: AssetsReducer,
 })
 
-export type RootState = ReturnType<typeof rootReducer>
-
 const composeEnhancers =
     (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middlewares = applyMiddleware(Thunk);

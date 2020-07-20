@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const GET_MARKET = gql`
+export const GET_ASSETS = gql`
     query PageAssets {
         assets(sort: [{ marketCapRank: ASC }], page: { limit: 25 }) {
             id

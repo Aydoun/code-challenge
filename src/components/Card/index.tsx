@@ -26,36 +26,18 @@ const DetailsCardContainer = styled.div`
     background: white;
 `;
 
-const CardName = styled.div`
-    font-weight: bold;
-    font-size: 22px;
-`;
-
-const CardPrice = styled.div`
-    font-weight: bold;
-    font-size: 22px;
-    color: blue;
-    margin-top: 10px;
-`;
-
-const FlexContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-`;
-
 interface CardProps {
     price: string;
     name: string;
-    onClick: any;
 }
 
 interface DetailsProps {
-    data?: any;
+    data: IMarket;
 }
 
-export const SimpleCard: React.FC<CardProps> = ({ price, name, onClick }) => {
+export const SimpleCard: React.FC<CardProps> = ({ price, name }) => {
     return (
-        <SimpleCardContainer onClick={onClick}>
+        <SimpleCardContainer>
             <div>
                 <Title>{name}</Title>
                 <Title big>{price}</Title>

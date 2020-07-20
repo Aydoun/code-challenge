@@ -1,26 +1,25 @@
 import {
     AssetActionTypes,
     FETCH_ASSETS,
-} from './types'
+    FETCH_ASSETS_SUCCESS
+} from './types';
 
-const initialState: IAssetsState = {
-    id: '',
-    assetName: '',
-    assetSymbol: '',
-    marketCap: 0,
-    markets: [],
-    loading: false,
+const initialState: IAssetResponse = {
+    assets: [],
+    loading: true,
     error: false,
 };
 
 export function AssetsReducer(
     state = initialState,
     action: AssetActionTypes
-): IAssetsState {
+): IAssetResponse {
     switch (action.type) {
         case FETCH_ASSETS:
-            return state;
+            return { ...state, loading: true };
+        case FETCH_ASSETS_SUCCESS:
+            return { ...state, loading: false, assets: action.payload };
         default:
-            return state
+            return state;
     }
 }

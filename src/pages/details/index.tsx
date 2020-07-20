@@ -1,23 +1,23 @@
-import React from 'react'
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Filter } from 'components/Filter';
 import { DetailCard } from 'components/Card';
-import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
-import { GET_MARKET } from 'gql/assets';
 
 export const Details: React.FC = () => {
     const { symbolId, symbol } = useParams();
-    const { loading, data } = useQuery(GET_MARKET);
+    const { loading, assets, error } = useSelector((state: RootState) => state.assets);
     const decodedSymbol = decodeURIComponent(symbol);
-    if (loading) return null;
 
-    const foundSymbol = data.assets.find((item: any) => item.id === symbolId);
-    const foundDetails = foundSymbol.markets.find((item: any) => item.marketSymbol === decodedSymbol);
+    if (loading) return <p>Loading...</p>;
+
+    const foundSymbol = assets!.find((item: IAssetsState) => item.id === symbolId);
+    const foundDetails = foundSymbol!.markets.find((item: IMarket) => item.marketSymbol === decodedSymbol);
 
     return (
         <>
             <Filter />
-            <DetailCard data={foundDetails} />
+            <DetailCard data={foundDetails!} />
         </>
     );
 }
