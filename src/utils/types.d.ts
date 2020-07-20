@@ -22,6 +22,7 @@ interface IAssetsState {
 
 type IAssetResponse = {
     assets: IAssetsState[];
+    filteredAssets: IAssetsState[];
     loading: boolean;
     error: boolean;
 }

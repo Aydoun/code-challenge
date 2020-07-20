@@ -16,10 +16,10 @@ test('should split market name and symbol name', () => {
 test('should Convert Currencies to their corresponding format', () => {
     const { formatCurrency } = U;
 
-    expect(formatCurrency(9121.14000000)).toBe('$9,121.14');
-    expect(formatCurrency(7979.43993853)).toBe('$7,979.44');
-    expect(formatCurrency(9125.17000000)).toBe('$9,125.17');
-    expect(formatCurrency(parseFloat('9125.17000000'))).toBe('$9,125.17');
+    expect(formatCurrency(9121.14000000)).toBe('$9,121.1');
+    expect(formatCurrency(7979.43993853)).toBe('$7,979.4');
+    expect(formatCurrency(9125.17000000)).toBe('$9,125.2');
+    expect(formatCurrency(parseFloat('9125.17000000'))).toBe('$9,125.2');
 });
 
 test('should Average a list of real numbers', () => {

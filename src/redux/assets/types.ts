@@ -1,5 +1,6 @@
 export const FETCH_ASSETS = 'FETCH_ASSETS';
 export const FETCH_ASSETS_SUCCESS = 'FETCH_ASSETS_SUCCESS';
+export const FILTER_ASSETS = 'FILTER_ASSETS';
 
 export interface Params {
     page?: number;
@@ -7,12 +8,19 @@ export interface Params {
 
 interface FetchAssetsAction {
     type: typeof FETCH_ASSETS,
-    payload: Params
+    payload: Params,
 }
 
-interface FetcAssetsSuccessAction {
+interface FetchAssetsSuccessAction {
     type: typeof FETCH_ASSETS_SUCCESS,
     payload: IAssetsState[]
 }
 
-export type AssetActionTypes = FetchAssetsAction | FetcAssetsSuccessAction;
+interface FilterAssetsAction {
+    type: typeof FILTER_ASSETS,
+    payload: string,
+}
+
+export type AssetActionTypes = FetchAssetsAction
+    | FetchAssetsSuccessAction
+    | FilterAssetsAction;

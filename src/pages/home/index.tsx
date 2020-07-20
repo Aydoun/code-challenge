@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchAssets } from 'redux/assets/action';
 import styled from 'styled-components/macro';
-import { Filter } from 'components/Filter';
 import { useHistory } from 'react-router-dom';
 import BootstrapTable from 'react-bootstrap-table-next';
 import { Pagination } from 'components/Pagination';
@@ -10,15 +9,15 @@ import { formatCurrency, averagePrices } from 'utils';
 
 const columns = [{
     dataField: 'assetName',
-    text: 'Name'
+    text: 'Name',
 }, {
     dataField: 'assetSymbol',
     text: 'Pair',
-    formatter: (cell: string) => cell + '/USD'
+    formatter: (cell: string) => cell + '/USD',
 }, {
     dataField: 'marketCap',
     text: 'Market Cap',
-    formatter: (cell: number) => formatCurrency(cell)
+    formatter: (cell: number) => formatCurrency(cell),
 },
 {
     dataField: 'markets',
@@ -29,11 +28,11 @@ const columns = [{
                 if (item.ticker && item.marketSymbol.includes('USD')) {
                     return parseFloat(item.ticker.lastPrice)
                 }
+                return null;
             }).filter(Boolean) as number[])
         );
-
         return formatCurrency(average);
-    }
+    },
 }];
 
 export const TableContainer = styled.div`
@@ -43,7 +42,7 @@ export const TableContainer = styled.div`
 export const Home: React.FC = () => {
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(25);
-    const { loading, assets, error } = useSelector((state: RootState) => state.assets);
+    const { loading, assets, filteredAssets, error } = useSelector((state: RootState) => state.assets);
     const history = useHistory();
 
     const onClick = (page: number) => () => {
@@ -51,22 +50,23 @@ export const Home: React.FC = () => {
         dispatch(fetchAssets(page));
     }
 
-    if (loading) return null;
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error...</p>
 
     return (
         <>
-            <Filter />
             <TableContainer>
                 <BootstrapTable
                     keyField='id'
                     columns={columns}
-                    data={assets}
+                    data={filteredAssets.length === 0 ? assets : filteredAssets}
                     bordered={false}
                     hover
                     rowStyle={{ cursor: 'pointer' }}
                     rowEvents={{
                         onClick: (t, r) => history.push('/' + r.id)
                     }}
+                    headerClasses="assets__table-header"
                 />
                 <Pagination onClick={onClick} currentPage={currentPage} />
             </TableContainer>

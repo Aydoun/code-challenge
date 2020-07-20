@@ -1,11 +1,10 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components/macro';
 import { useSelector } from 'react-redux';
-import { Filter } from 'components/Filter';
 import { SimpleCard } from 'components/Card';
 import { Row, Column } from 'components/Grid';
 import { Title } from 'components/Text';
-import { useHistory, useParams, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import _groupBy from 'lodash.groupby';
 import _get from 'lodash.get';
 import { formatCurrency, splitName } from 'utils';
@@ -19,7 +18,6 @@ const StyledLink = styled(Link)`
 `;
 
 export const Markets: React.FC = () => {
-    const history = useHistory();
     const { symbolId } = useParams();
     const { loading, assets, error } = useSelector((state: RootState) => state.assets);
     const GroupedAssets = useMemo(
@@ -28,15 +26,12 @@ export const Markets: React.FC = () => {
             const filtered = assets.find((item: any) => item.id === symbolId);
             return _groupBy(filtered!.markets, 'exchangeSymbol');
         }, [symbolId, assets]);
-    const CardClick = (symbolId: string, marketSymbol: string) => () => {
-        history.push(`/${symbolId}/${encodeURIComponent(marketSymbol)}`);
-    }
 
     if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error...</p>;
 
     return (
         <>
-            <Filter />
             {Object.keys(GroupedAssets).map((item: string) => {
                 const cards = GroupedAssets[item].map(asset =>
                     <Column key={asset.marketSymbol}>

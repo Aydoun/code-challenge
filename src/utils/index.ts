@@ -7,7 +7,7 @@ export const formatCurrency = (amount: number | string, format: string = 'curren
     const _amount = format === 'currency' ? numAmount : numAmount / 100;
 
     return new Intl.NumberFormat('en-US',
-        { style: format, currency: 'USD', maximumSignificantDigits: 3 }
+        { style: format, currency: 'USD', maximumSignificantDigits: 5 }
     ).format(Number(_amount));
 }
 

@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 import {
-    FETCH_ASSETS,
     FETCH_ASSETS_SUCCESS,
+    FILTER_ASSETS,
 } from './types';
 import { ThunkAction } from 'redux-thunk';
 import { GET_ASSETS } from 'gql/assets';
@@ -18,4 +18,11 @@ export const fetchAssets = (
     });
 
     dispatch({ type: FETCH_ASSETS_SUCCESS, payload: data.assets });
+}
+
+export const FilterAssetsAction = (key: string) => {
+    return {
+        type: FILTER_ASSETS,
+        payload: key,
+    };
 }
