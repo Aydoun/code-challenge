@@ -1,22 +1,14 @@
 import React, { useMemo } from 'react';
-import styled from 'styled-components/macro';
 import { Filter } from 'components/Filter';
 import { SimpleCard } from 'components/Card';
+import { Row, Column } from 'components/Grid';
+import { Title } from 'components/Text';
 import { useQuery } from '@apollo/client';
 import { useHistory, useParams } from 'react-router-dom';
 import { GET_MARKET } from 'gql/assets';
 import _groupBy from 'lodash.groupby';
 import _get from 'lodash.get';
 import { formatCurrency, splitName } from 'utils';
-
-const CardsContainer = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-`;
-
-const Title = styled.p`
-    font-weight: bold;
-`;
 
 export const Markets: React.FC = () => {
     const history = useHistory();
@@ -39,17 +31,19 @@ export const Markets: React.FC = () => {
             <Filter />
             {Object.keys(GroupedAssets).map((item: string) => {
                 const cards = GroupedAssets[item].map(asset =>
-                    <SimpleCard
-                        name={splitName(asset.marketSymbol)}
-                        price={formatCurrency(_get(asset, 'ticker.lastPrice', ''))}
-                        onClick={CardClick(symbolId, asset.marketSymbol)}
-                    />
+                    <Column key={asset.marketSymbol}>
+                        <SimpleCard
+                            name={splitName(asset.marketSymbol)}
+                            price={formatCurrency(_get(asset, 'ticker.lastPrice', ''))}
+                            onClick={CardClick(symbolId, asset.marketSymbol)}
+                        />
+                    </Column>
                 )
                 return (
-                    <>
+                    <React.Fragment key={item}>
                         <Title>{item}</Title>
-                        <CardsContainer>{cards}</CardsContainer>
-                    </>
+                        <Row>{cards}</Row>
+                    </React.Fragment>
                 )
             })}
         </>

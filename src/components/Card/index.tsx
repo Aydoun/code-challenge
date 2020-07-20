@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import { SmallTitle, Title } from 'components/Text';
+import { Row, Column } from 'components/Grid';
 import { formatCurrency, splitName } from 'utils';
 
 const SimpleCardContainer = styled.div`
@@ -55,8 +57,8 @@ export const SimpleCard: React.FC<CardProps> = ({ price, name, onClick }) => {
     return (
         <SimpleCardContainer onClick={onClick}>
             <div>
-                <CardName>{name}</CardName>
-                <CardPrice>{price}</CardPrice>
+                <Title>{name}</Title>
+                <Title big>{price}</Title>
             </div>
         </SimpleCardContainer>
     );
@@ -68,35 +70,35 @@ export const DetailCard: React.FC<DetailsProps> = ({ data }) => {
     return (
         <DetailsCardContainer>
             <p>{data.exchangeSymbol}</p>
-            <FlexContainer>
-                <div>
-                    <div>{splitName(data.marketSymbol)}</div>
-                    <div>Pair</div>
-                </div>
-                <div>
-                    <div>{formatCurrency(lastPrice)}</div>
-                    <div>Price</div>
-                </div>
-            </FlexContainer>
+            <Row>
+                <Column>
+                    <Title big>{splitName(data.marketSymbol)}</Title>
+                    <SmallTitle>Pair</SmallTitle>
+                </Column>
+                <Column>
+                    <Title big>{formatCurrency(lastPrice)}</Title>
+                    <SmallTitle>Price</SmallTitle>
+                </Column>
+            </Row>
             <hr />
-            <FlexContainer>
-                <div>
-                    <div>{formatCurrency(lastPrice)}</div>
-                    <div>Price</div>
-                </div>
-                <div>
-                    <div>{formatCurrency(percentChange, 'percent')}</div>
-                    <div>24h change</div>
-                </div>
-                <div>
-                    <div>{formatCurrency(lowPrice)}</div>
-                    <div>24h Low</div>
-                </div>
-                <div>
-                    <div>{formatCurrency(highPrice)}</div>
-                    <div>24h High</div>
-                </div>
-            </FlexContainer>
+            <Row>
+                <Column>
+                    <Title>{formatCurrency(lastPrice)}</Title>
+                    <SmallTitle>Price</SmallTitle>
+                </Column>
+                <Column>
+                    <Title>{formatCurrency(percentChange, 'percent')}</Title>
+                    <SmallTitle>24h change</SmallTitle>
+                </Column>
+                <Column>
+                    <Title>{formatCurrency(lowPrice)}</Title>
+                    <SmallTitle>24h Low</SmallTitle>
+                </Column>
+                <Column>
+                    <Title>{formatCurrency(highPrice)}</Title>
+                    <SmallTitle>24h High</SmallTitle>
+                </Column>
+            </Row>
         </DetailsCardContainer>
     );
 }

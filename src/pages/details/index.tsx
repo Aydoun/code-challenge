@@ -1,5 +1,4 @@
-import React, { useMemo } from 'react';
-import styled from 'styled-components/macro';
+import React from 'react'
 import { Filter } from 'components/Filter';
 import { DetailCard } from 'components/Card';
 import { useQuery } from '@apollo/client';
