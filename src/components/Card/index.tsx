@@ -39,8 +39,8 @@ export const SimpleCard: React.FC<CardProps> = ({ price, name }) => {
     return (
         <SimpleCardContainer>
             <div>
-                <Title>{name}</Title>
-                <Title big>{price}</Title>
+                <Title big>{name}</Title>
+                <Title big color="blue">{price}</Title>
             </div>
         </SimpleCardContainer>
     );
@@ -54,11 +54,11 @@ export const DetailCard: React.FC<DetailsProps> = ({ data }) => {
             <p>{data.exchangeSymbol}</p>
             <Row>
                 <Column>
-                    <Title big>{splitName(data.marketSymbol)}</Title>
+                    <Title big color="blue">{splitName(data.marketSymbol)}</Title>
                     <SmallTitle>Pair</SmallTitle>
                 </Column>
                 <Column>
-                    <Title big>{formatCurrency(lastPrice)}</Title>
+                    <Title big color="blue">{formatCurrency(lastPrice)}</Title>
                     <SmallTitle>Price</SmallTitle>
                 </Column>
             </Row>
@@ -69,7 +69,7 @@ export const DetailCard: React.FC<DetailsProps> = ({ data }) => {
                     <SmallTitle>Price</SmallTitle>
                 </Column>
                 <Column>
-                    <Title>{formatCurrency(percentChange, 'percent')}</Title>
+                    <Title color="green">{formatCurrency(percentChange, 'percent')}</Title>
                     <SmallTitle>24h change</SmallTitle>
                 </Column>
                 <Column>

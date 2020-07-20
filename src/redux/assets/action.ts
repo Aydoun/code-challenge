@@ -12,6 +12,9 @@ export const fetchAssets = (
 ): ThunkAction<void, RootState, unknown, Action<string>> => async dispatch => {
     const { data } = await client.query({
         query: GET_ASSETS,
+        variables: {
+            pageSize,
+        }
     });
 
     dispatch({ type: FETCH_ASSETS_SUCCESS, payload: data.assets });

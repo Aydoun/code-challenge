@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 
-export const Title = styled.div<{ big?: boolean | undefined }>`
-    color: ${props => (props.big ? 'blue' : 'black')};
+export const Title = styled.div<{ big?: boolean, color?: string }>`
+    color: ${props => (props.color || 'black')};
     font-size: ${props => (props.big ? '1.6em' : '1em')};
     font-weight: bold;
 `;
